@@ -3,6 +3,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Edu+TAS+Beginner:wght@500&family=Poppins:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Passion+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap');
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  overflow: auto;
+}
+
+.svg-container {
+  overflow: hidden; /* Apply overflow hidden to the container */
+}
 
 * {
     margin: 0;
@@ -1080,6 +1091,9 @@ body{
       margin-bottom: 0px;
       margin-left: 0px;
     }
+    #visual{
+      display: none !important;
+    }
   }
   
   @media (max-width: 500px) {
@@ -1737,8 +1751,7 @@ label{
     display: none;
   }
   #visual3{
-    top: 20vh;
-    left: 20vw;
+    display: none;
   }
 }
 

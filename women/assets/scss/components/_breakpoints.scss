@@ -53,7 +53,7 @@
             transition: top .4s, opacity .3s;
         }  
         &__content{
-            grid-template-columns: repeat(4, max-content);
+            grid-template-columns: repeat(5, max-content);
             column-gap: 6rem;
             max-width: 1120px;
             margin-inline: auto;

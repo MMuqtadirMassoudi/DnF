@@ -8,31 +8,6 @@ function hidehamburger() {
     sidebar.style.display = 'none';
 }
 
-function locomotiveAnimation() {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const locoScroll = new LocomotiveScroll({
-        el: document.querySelector("#main"),
-        smooth: true
-    });
-
-    locoScroll.on("scroll", ScrollTrigger.update);
-
-    ScrollTrigger.scrollerProxy("#main", {
-        scrollTop(value) {
-            return arguments.length ? locoScroll.scrollTo(value, 0, 0) : locoScroll.scroll.instance.scroll.y;
-        },
-        getBoundingClientRect() {
-            return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-        },
-        pinType: document.querySelector("#main").style.transform ? "transform" : "fixed"
-    });
-
-    ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
-    ScrollTrigger.refresh();
-}
-locomotiveAnimation();
-
 function loadinganimation() {
     gsap.from("#page1 h1", {
         y: 100,
@@ -103,25 +78,4 @@ function infotextanimation() {
     });
 }
 infotextanimation();
-
-function locomotiveAnimation() {
-    const locoScroll = new LocomotiveScroll({
-        el: document.querySelector("#main"),
-        smooth: true,
-    });
-
-    locoScroll.on("scroll", ScrollTrigger.update);
-
-    document.querySelectorAll('[data-scroll-to]').forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const target = document.querySelector(link.getAttribute('data-scroll-to'));
-            if (target) {
-                locoScroll.scrollTo(target);
-            }
-        });
-    });
-}
-locomotiveAnimation();
-
 

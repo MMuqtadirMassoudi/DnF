@@ -75,10 +75,7 @@ addEventListener('resize', removeStyle)
 
 
 function locomotiveAnimation() {
-    const locoScroll = new LocomotiveScroll({
-        el: document.querySelector("#main"),
-        smooth: true,
-    });
+    
 
     locoScroll.on("scroll", ScrollTrigger.update);
 

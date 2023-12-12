@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&F - Product Details</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+    />
+    <style>
+        .product-img{
+            width: 100%;
+            display: block;
+            border-radius: 10px;
+        }
+        .main-wrapper{
+            min-height: 100vh;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container{
+            max-width: 1200px;
+            padding: 0 1rem;
+            margin: 0 auto;
+        }
+        .product-div{
+            margin: 1rem 0;
+            padding: 2rem 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            background-color: #fff;
+            border-radius: 3px;
+            column-gap: 10px;
+        }
+        .product-div-left{
+            padding: 20px;
+        }
+        .product-div-right{
+            padding: 20px;
+        }
+        .img-container img{
+            width: 20vw;
+            margin: 0 auto;
+        }
+        .hover-container{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            margin-top: 32px;
+        }
+        .hover-container div{
+            border: 2px solid #A58264;
+            padding: 1rem;
+            border-radius: 3px;
+            margin: 0 4px 8px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .active{
+            border-color: #095548 !important;
+        }
+        .hover-container div:hover{
+            border-color: #A58264;
+        }
+        .hover-container div img{
+            width: 6vw;
+            cursor: pointer;
+        }
+        .product-div-right span{
+            display: block;
+        }
+        .product-name{
+            font-size: 26px;
+            margin-bottom: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+        .product-price{
+            font-weight: 700;
+            font-size: 24px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        .product-rating{
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+        }
+        .product-rating span{
+            margin-right: 6px;
+        }
+        .product-description{
+            font-weight: 18px;
+            line-height: 1.6;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 22px;
+        }
+        .btn-groups{
+            margin-top: 22px;
+        }
+        .btn-groups button{
+            display: inline-block;
+            font-size: 16px;
+            font-family: inherit;
+            text-transform: uppercase;
+            padding: 15px 16px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-groups button .fas{
+            margin-right: 8px;
+        }
+        .add-cart-btn{
+            background-color: #095548;
+            border: 2px solid #095548;
+            margin-right: 8px;
+        }
+        .add-cart-btn:hover{
+            background-color: #fff;
+            color: #095548;
+        }
+        .buy-now-btn{
+            background-color: #000;
+            border: 2px solid #000;
+        }
+        .buy-now-btn:hover{
+            background-color: #fff;
+            color: #000;
+        }
+        
+        @media screen and (max-width: 992px){
+            .product-div{
+                grid-template-columns: 100%;
+            }
+            .product-div-right{
+                text-align: center;
+            }
+            .product-rating{
+                justify-content: center;
+            }
+            .product-description{
+                max-width: 400px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+        }
+        
+        @media screen and (max-width: 400px){
+            .btn-groups button{
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media screen and (max-width: 425px){
+            .btn-groups{
+                position: relative;
+                right: 47%;
+            }
+        }
+
+        @media screen and (max-width: 320px){
+            .btn-groups{
+                position: relative;
+                right: 53% !important;
+            }
+        }
+
+        @media screen and (max-width: 768px){
+            .btn-groups{
+                position: relative;
+                right: 37%;
+            }
+        }
+
+        @media screen and (max-width: 992px){
+            .btn-groups{
+                position: relative;
+                right: 38%;
+            }
+        }
+        
+        body{
+            background-color: #f1f1f1;    
+        }
+
+        .menu-contact{
+            position: relative;
+            left: 60%;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <div class="nav__data">
+                <a href="../index.html" class="nav__logo">
+                    <img src="DnF.png" width="90vw" alt="">
+                </a>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line nav__toggle-menu"></i>
+                    <i class="ri-close-line nav__toggle-close"></i>
+                </div>
+            </div>
+
+            <!--=============== NAV MENU ===============-->
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li>
+                        <a href="../index.html" class="nav__link">Home</a>
+                    </li>
+
+                    <!--=============== DROPDOWN 1 ===============-->
+                    <li class="dropdown__item">                      
+                        <div class="nav__link dropdown__button">
+                            Products <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-women-line"></i>
+                                    </div>
+
+                                    <span class="dropdown__title"><a href="../women.html">Women</a></span>
+
+                                    <ul class="dropdown__list">
+                                        <li>
+                                            <a href="../women/t-shirt.html" class="dropdown__link">T-Shirt &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../women/tracksuit.html" class="dropdown__link">TrackSuit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../women/jeans.html" class="dropdown__link">Jeans &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../women/jumpers.html" class="dropdown__link">Jumper &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../women/suit.html" class="dropdown__link">Suit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../women/shoes.html" class="dropdown__link">Shoes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../women/handbag.html" class="dropdown__link">Handbag &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li><li>
+                                            <a href="../women/watches.html" class="dropdown__link">Watches &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../women/dress.html" class="dropdown__link">Dress &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../women/afghani.html" class="dropdown__link">Afghani Clothes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-men-fill"></i>
+                                    </div>
+
+                                    <span class="dropdown__title"><a href="../men.html">Men</a></span>
+
+                                    <ul class="dropdown__list">
+                                        <li>
+                                            <a href="../men/t-shirt.html" class="dropdown__link">T-Shirt &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../men/tracksuit.html" class="dropdown__link">TrackSuit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../men/jeans.html" class="dropdown__link">Jeans &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../men/jumpers.html" class="dropdown__link">Jumpers &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../men/shoes.html" class="dropdown__link">Shoes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../men/backpack.html" class="dropdown__link">BackPack &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../men/watches.html" class="dropdown__link">Watches &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-men-line"></i>
+                                    </div>
+
+                                    <span class="dropdown__title"><a href="../boy.html">Boy</a></span>
+
+                                    <ul class="dropdown__list">
+                                        <li>
+                                            <a href="../boy/t-shirt.html" class="dropdown__link">T-Shirts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../boy/jumpers.html" class="dropdown__link">Jumpers &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../boy/pants.html" class="dropdown__link">Pants &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../boy/tracksuit.html" class="dropdown__link">TrackSuits &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../boy/shoes.html" class="dropdown__link">Shoes &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-women-fill"></i>
+                                    </div>
+
+                                    <span class="dropdown__title"><a href="../girl.html">Girl</a></span>
+
+                                    <ul class="dropdown__list">
+                                        <li>
+                                            <a href="../girl/t-shirt.html" class="dropdown__link">T-Shirt
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../girl/jumpers.html" class="dropdown__link">Jumpers
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../girl/pants.html" class="dropdown__link">Pants
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../girl/tracksuit.html" class="dropdown__link">TrackSuits
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                        <li>
+                                            <a href="../girl/shoes.html" class="dropdown__link">Shoes
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-gift-line"></i>
+                                    </div>
+
+                                    <span class="dropdown__title"><a href="../gifts.html">Gifts</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                    <a href="../index.html" class="nav__link">Contact Us</a>
+                    </li>
+                    <li>
+                        <a href="../index.html" class="nav__link">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div id="main">
+        <br><br><br><br>
+        <div class = "main-wrapper">
+            <div class = "container">
+                <div class = "product-div">
+                    <div class = "product-div-left">
+                        <div class = "img-container">
+                            <a href="#">
+                                <img class="product-img" data-fancybox="gallery" src = "../Products/T-shirt-Section/Women-Tshirt-1.jpg" alt = "watch">
+                            </a>
+                        </div>
+                        <div class = "hover-container">
+                            <div><img class="product-img" data-fancybox="gallery" src = "../Products/T-shirt-Section/Women-Tshirt-1.jpg"></div>
+                            <div><img class="product-img" data-fancybox="gallery" src = "../Products/T-shirt-Section/Women-Tshirt-2.jpg"></div>
+                            <div><img class="product-img" data-fancybox="gallery" src = "../Products/T-shirt-Section/Women-Tshirt-3.jpg"></div>
+                        </div>
+                    </div>
+                    <div class = "product-div-right">
+                        <span class = "product-name">Women T-Shirt</span>
+                        <span class = "product-price">$ 50.25</span>
+                        <p class = "product-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae animi ad minima veritatis dolore. Architecto facere dignissimos voluptate fugit ratione molestias quis quidem exercitationem voluptas.</p>
+                        <div class = "btn-groups">
+                            <div class="menu-contact">
+                                <li style="--i:1;--clr:#b43aa4;">
+                                    <a href="https://instagram.com/dilawarzada_fashion_?igshid=MzMyNGUyNmU2YQ==" target="_blank"
+target="_blank"
+target="_blank"
+target="_blank"
+target="_blank"><ion-icon name="logo-instagram"></ion-icon></a>
+                                </li>
+                                <li style="--i:2;--clr:#1877f2;">
+                                    <a href="https://www.facebook.com/"><ion-icon name="logo-facebook" target="_blank"
+target="_blank"
+target="_blank"
+target="_blank"
+target="_blank"></ion-icon></a>
+                                </li>
+                                <li style="--i:3;--clr:#000000;">
+                                    <a href="https://www.tiktok.com/@dilawarzada23?_t=8hBpFfZjl21&_r=1" target="_blank"
+target="_blank"
+target="_blank"
+target="_blank"
+target="_blank"><ion-icon name="logo-tiktok"></ion-icon></a>
+                                </li>
+                                <li style="--i:4;--clr:#ff0000;">
+                                    <a href="https://www.youtube.com/"><ion-icon name="logo-youtube" target="_blank"
+target="_blank"
+target="_blank"
+target="_blank"
+target="_blank"></ion-icon></a>
+                                </li>
+                        
+                                <div class="toggle">
+                                    <ion-icon style="color: black;" name="share-social"></ion-icon>
+                                    <ion-icon style="color: black;" name="close-outline"></ion-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="footer">
+            <footer class="footer">
+                <div class="waves">
+                    <div class="wave" id="wave1"></div>
+                    <div class="wave" id="wave2"></div>
+                    <div class="wave" id="wave3"></div>
+                    <div class="wave" id="wave4"></div>
+                </div> 
+                <ul class="menu">
+                    <li class="menu__item"><a class="menu__link" href="index.html">Home</a></li>
+                    <li class="menu__item"><a class="menu__link" href="#about-us">About</a></li>
+                    <li class="menu__item"><a class="menu__link" href="#contact-header">Contact Us</a></li>
+
+                </ul>
+                <p>&copy;2024 dundfashion.com | All Rights Reserved</p>
+            </footer>
+        </div>
+    </div>
+
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        let toggle = document.querySelector('.toggle');
+        let menu = document.querySelector('.menu-contact');
+        toggle.onclick = function(){
+            menu.classList.toggle('active');
+        }
+
+        const allHoverImages = document.querySelectorAll('.hover-container div img');
+        const imgContainer = document.querySelector('.img-container');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            allHoverImages[0].parentElement.classList.add('active');
+        });
+
+        allHoverImages.forEach((image) => {
+            image.addEventListener('mouseover', () =>{
+                imgContainer.querySelector('img').src = image.src;
+                resetActiveImg();
+                image.parentElement.classList.add('active');
+            });
+        });
+
+        function resetActiveImg(){
+            allHoverImages.forEach((img) => {
+                img.parentElement.classList.remove('active');
+            });
+        }
+
+        Fancybox.bind("[data-fancybox]", {
+            // Add various options here
+            // For example:
+          
+            // Enable the click to close functionality
+            closeOnBackdrop: true,
+          
+            // Display navigation arrows
+            Navigation: {
+              arrow: true,
+            },
+          
+            // Add custom settings
+            custom: {
+              // You can customize the appearance of the lightbox here
+              container: {
+                // Add CSS styles for the lightbox container
+                background: "#fff",
+              },
+            },
+          
+            // Callbacks
+            on: {
+              // When the lightbox is opened
+              opened: function (instance, slide) {
+                console.log("Lightbox opened");
+              },
+          
+              // When the lightbox is closed
+              closed: function (instance, slide) {
+                console.log("Lightbox closed");
+              },
+            },
+          });
+          
+    </script>
+    <script src="../script.js"></script>
+</body>
+</html>
